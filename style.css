@@ -12,7 +12,46 @@ html {
 #BST {
   border: 1px solid white;
   position: relative;
-  transition: all 1s ease-out;
   width: 90%;
   height: 85%;
+}
+.node {
+  z-index: 1;
+  background: #16a144;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  border-radius: 50%;
+  border: none;
+  font-family: Arial, Helvetica, sans-serif;
+  animation-iteration-count: 1;
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
+  font-size: 10px;
+  border: 1px solid black;
+  outline: none;
+  width: 20px;
+  height: 20px;
+}
+
+.right {
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-radius: 0 110% 0 0;
+}
+.left {
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-radius: 110% 0 0 0;
+}
+.node:hover {
+  background: #bfcac4;
+  cursor: pointer;
+}
+.line {
+  z-index: 0;
+  background: none;
+  position: absolute;
+  height: 65px;
 }

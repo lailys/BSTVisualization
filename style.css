@@ -1,0 +1,18 @@
+body,
+html {
+  background: white;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+#BST {
+  border: 1px solid white;
+  position: relative;
+  transition: all 1s ease-out;
+  width: 90%;
+  height: 85%;
+}

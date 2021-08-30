@@ -250,7 +250,81 @@ class BinarySearchTree {
       }
     }
   }
+  delete(nodeToDelet, elementToDelet, value) {
+
+    if (!nodeToDelet.left && !nodeToDelet.right) {
+      nodeToDelet.parent[nodeToDelet.parentSide] = null
+      nodeToDelet = null
+      page.removeChild(elementToDelet);
+      const lineToRemove = document.getElementsByClassName(`${value}`)[0]
+      page.removeChild(lineToRemove);
+    } else if (!nodeToDelet.left && nodeToDelet.right) {
+      this.updateSubTree(nodeToDelet.right)
+      nodeToDelet = null
+    } else if (nodeToDelet.left && !nodeToDelet.right) {
+      this.updateSubTree(nodeToDelet.left)
+      nodeToDelet = null
+    } else if (nodeToDelet.left && nodeToDelet.right) {
+
+      let currNode = nodeToDelet.right;
+    }
+  }
   deletNode(args, e) {
+
+    const nodeToDelet = this.findNode(args[1])
+    const elementToDelet = args[0]
+    const value = args[1]
+    this.delete(nodeToDelet, elementToDelet, value)
+
+  }
+  postOrderTraversal(node) {
+    if (node.left) this.postOrderTraversal(node.left);
+    if (node.right) this.postOrderTraversal(node.right);
+    const elToDelete = document.getElementsByClassName(`node-${node.value}`)[0]
+    this.deletNode([elToDelete, node.value]);
+  }
+  preOrderTraversal(node) {
+    let subValues = []
+
+    function traversal(node) {
+      subValues.push(node.value)
+      if (node.left) traversal(node.left);
+      if (node.right) traversal(node.right);
+    }
+    traversal(node)
+    return subValues
+  }
+  updateSubTree(subTree) {
+    let subValues = []
+
+    function preOrderTraversal(node) {
+      subValues.push(node.value)
+      if (node.left) preOrderTraversal(node.left);
+      if (node.right) preOrderTraversal(node.right);
+    }
+    preOrderTraversal(subTree)
+    this.postOrderTraversal(subTree.parent)
+    const length = subValues.length
+    for (let i = 0; i < length; i++) {
+      this.baseAddNewNode(subValues[i])
+    }
+
+  }
+  findNode(value) {
+    if (this.root === null) return false;
+    var current = this.root,
+      found = false;
+    while (current && !found) {
+      if (value < current.value) {
+        current = current.left;
+      } else if (value > current.value) {
+        current = current.right;
+      } else {
+        found = true;
+      }
+    }
+    if (!found) return undefined;
+    return current;
 
   }
 }
@@ -278,13 +352,14 @@ function throttled(fn, delay) {
     return fn(...args);
   }
 }
-var debouncedAddNode = throttled(function (e) {
-  if (e.keyCode === 32) {
-    console.log("spacebar was clicked to add a random node")
-    const randomNumber = Math.floor(Math.random() * (201)) - 100
-    console.log(randomNumber)
-    tree.animateAddNewNode(randomNumber)
+var debouncedAddNode =
+  (function (e) {
+    if (e.keyCode === 32) {
+      console.log("spacebar was clicked to add a random node")
+      const randomNumber = Math.floor(Math.random() * (201)) - 100
+      console.log(randomNumber)
+      tree.animateAddNewNode(randomNumber)
 
-  }
-}, 2500);
+    }
+  }, 2500);
 document.body.addEventListener('keyup', debouncedAddNode)

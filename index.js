@@ -298,7 +298,6 @@ class BinarySearchTree {
       page.innerHTML = ""
       this.root = null
       const length = newTree.length
-      console.log(nodeExistMap[newTree[0]])
       for (let i = 0; i < length; i++) {
         nodeExistMap[newTree[i]] = false
         this.baseAddNewNode(newTree[i])

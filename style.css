@@ -12,9 +12,13 @@ html {
 #BST {
   border: 1px solid white;
   position: relative;
+  transition: all 1s ease-out;
   width: 90%;
   height: 85%;
 }
+/* /* #span{
+    color:white;
+} */
 .node {
   z-index: 1;
   background: #16a144;
@@ -24,17 +28,22 @@ html {
   position: absolute;
   border-radius: 50%;
   border: none;
+  transition: all 1s ease-in;
   font-family: Arial, Helvetica, sans-serif;
   animation-iteration-count: 1;
   animation-duration: 4s;
   animation-fill-mode: forwards;
   font-size: 10px;
   border: 1px solid black;
-  outline: none;
   width: 20px;
   height: 20px;
 }
-
+.node:active {
+  background: #16a144;
+}
+.node:focus {
+  background: #16a144;
+}
 .right {
   border-top: 1px solid black;
   border-right: 1px solid black;
@@ -53,5 +62,8 @@ html {
   z-index: 0;
   background: none;
   position: absolute;
+  animation-iteration-count: 1;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
   height: 65px;
 }
